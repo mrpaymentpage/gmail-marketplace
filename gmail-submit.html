@@ -17,131 +17,177 @@
     body {
       background: #f4f6f9;
       color: #1f2937;
-      padding: 20px 12px 40px;
+      padding: 16px 8px 35px;
     }
 
     .container {
-      max-width: 650px;
+      width: 100%;
+      max-width: 760px;
       margin: auto;
     }
 
     .header {
       background: linear-gradient(135deg, #111827, #374151);
       color: white;
-      padding: 25px 20px;
-      border-radius: 18px;
+      padding: 23px 15px;
+      border-radius: 17px;
       text-align: center;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      margin-bottom: 14px;
+      box-shadow: 0 7px 22px rgba(0,0,0,.12);
     }
 
     .logo {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 900;
       letter-spacing: 2px;
     }
 
     .subtitle {
-      margin-top: 7px;
-      font-size: 13px;
-      opacity: 0.85;
+      margin-top: 6px;
+      font-size: 12px;
+      opacity: .82;
       letter-spacing: 1px;
     }
 
     .card {
-      background: white;
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      background: #fff;
+      border-radius: 17px;
+      padding: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.07);
     }
 
     .title {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 6px;
+      font-size: 19px;
+      font-weight: 900;
+      margin-bottom: 5px;
     }
 
     .description {
       color: #6b7280;
-      font-size: 13px;
-      margin-bottom: 18px;
+      font-size: 12px;
       line-height: 1.5;
+      margin-bottom: 14px;
     }
 
     .counter {
       background: #f3f4f6;
-      border-radius: 10px;
-      padding: 10px 12px;
-      margin-bottom: 15px;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .row {
       border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 15px;
-      margin-bottom: 12px;
-      background: #fafafa;
-      position: relative;
-    }
-
-    .row-number {
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      color: #374151;
-    }
-
-    .field {
-      margin-bottom: 12px;
-    }
-
-    .field:last-child {
-      margin-bottom: 0;
-    }
-
-    label {
-      display: block;
+      border-radius: 9px;
+      padding: 9px 11px;
+      margin-bottom: 10px;
       font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #374151;
+      font-weight: 800;
     }
 
-    input {
+    /* ================================
+       EXCEL TABLE
+    ================================= */
+
+    .table-wrapper {
       width: 100%;
-      padding: 13px 14px;
+      overflow-x: auto;
       border: 1px solid #d1d5db;
-      border-radius: 10px;
-      outline: none;
-      font-size: 14px;
+      border-radius: 11px;
       background: white;
-      transition: 0.2s;
     }
 
-    input:focus {
+    .excel-table {
+      width: 100%;
+      min-width: 570px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .excel-table th {
+      background: #f3f4f6;
+      color: #374151;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 10px 7px;
+      border-right: 1px solid #d1d5db;
+      border-bottom: 1px solid #d1d5db;
+      text-align: center;
+    }
+
+    .excel-table th:last-child {
+      border-right: none;
+    }
+
+    .excel-table td {
+      height: 48px;
+      padding: 4px;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+    }
+
+    .excel-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .excel-table td:last-child {
+      border-right: none;
+    }
+
+    .number-cell {
+      width: 48px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 900;
+      color: #4b5563;
+      background: #f9fafb !important;
+    }
+
+    .gmail-cell {
+      width: 42%;
+    }
+
+    .pass-cell {
+      width: 42%;
+    }
+
+    .action-cell {
+      width: 58px;
+      text-align: center;
+    }
+
+    .excel-input {
+      width: 100%;
+      height: 39px;
+      padding: 7px 9px;
+      border: 1px solid transparent;
+      outline: none;
+      border-radius: 5px;
+      background: transparent;
+      font-size: 13px;
+      color: #111827;
+    }
+
+    .excel-input:hover {
+      background: #f9fafb;
+      border-color: #e5e7eb;
+    }
+
+    .excel-input:focus {
+      background: #fff;
       border-color: #111827;
-      box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+      box-shadow: 0 0 0 2px rgba(17,24,39,.08);
     }
 
-    input.error {
-      border-color: #dc2626;
-      background: #fff7f7;
+    .excel-input.error {
+      border-color: #dc2626 !important;
+      background: #fff1f2 !important;
     }
 
     .remove-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
+      width: 31px;
+      height: 31px;
       border: none;
+      border-radius: 7px;
       background: #fee2e2;
       color: #dc2626;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      font-size: 17px;
-      font-weight: bold;
+      font-size: 18px;
+      font-weight: 900;
       cursor: pointer;
     }
 
@@ -151,17 +197,17 @@
 
     .buttons {
       display: flex;
-      gap: 10px;
-      margin-top: 18px;
+      gap: 9px;
+      margin-top: 14px;
     }
 
     button {
       cursor: pointer;
       border: none;
-      font-weight: 800;
-      border-radius: 11px;
-      padding: 14px;
-      font-size: 14px;
+      font-weight: 900;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 13px;
     }
 
     .add-btn {
@@ -181,17 +227,23 @@
     }
 
     .submit-btn:hover {
-      background: #000000;
+      background: #000;
+    }
+
+    .submit-btn:disabled,
+    .add-btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
     }
 
     .message {
       display: none;
       padding: 13px;
       border-radius: 10px;
-      margin-top: 15px;
+      margin-top: 14px;
       font-size: 13px;
-      font-weight: 700;
-      line-height: 1.5;
+      font-weight: 800;
+      line-height: 1.55;
     }
 
     .success {
@@ -207,35 +259,78 @@
     }
 
     .info {
-      margin-top: 18px;
-      padding: 13px;
+      margin-top: 14px;
+      padding: 11px;
       background: #f9fafb;
-      border-radius: 10px;
+      border-radius: 9px;
       color: #6b7280;
-      font-size: 12px;
+      font-size: 11px;
       line-height: 1.6;
       text-align: center;
     }
 
+    /* ================================
+       SUCCESS SCREEN
+    ================================= */
+
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 25px 12px;
+    }
+
+    .success-icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .success-title {
+      font-size: 21px;
+      font-weight: 900;
+      margin-bottom: 7px;
+    }
+
+    .pending {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 900;
+      margin: 8px 0 14px;
+    }
+
+    .success-text {
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
     @media (max-width: 480px) {
+
       body {
-        padding: 12px 8px 30px;
+        padding: 10px 6px 25px;
       }
 
       .header {
-        padding: 22px 15px;
+        padding: 20px 10px;
+      }
+
+      .logo {
+        font-size: 24px;
       }
 
       .card {
-        padding: 15px;
+        padding: 11px;
       }
 
       .buttons {
         flex-direction: column;
       }
 
-      .logo {
-        font-size: 25px;
+      .excel-table {
+        min-width: 530px;
       }
     }
   </style>
@@ -243,461 +338,592 @@
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- HEADER -->
-    <div class="header">
-      <div class="logo">RS NETWORK</div>
-      <div class="subtitle">GMAIL MARKETPLACE</div>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">RS NETWORK</div>
+    <div class="subtitle">GMAIL MARKETPLACE</div>
+  </div>
+
+
+  <!-- MAIN CARD -->
+  <div class="card" id="mainCard">
+
+    <div class="title">
+      📋 BULK GMAIL SUBMISSION
     </div>
 
-    <!-- MAIN CARD -->
-    <div class="card">
+    <div class="description">
+      Add your Gmail and PASS below. Add multiple entries and submit them together.
+    </div>
 
-      <div class="title">📋 BULK GMAIL SUBMISSION</div>
+    <div class="counter" id="counter">
+      📦 Total Entries: 1
+    </div>
 
-      <div class="description">
-        Add your Gmail and PASS below. You can submit multiple
-        entries together.
-      </div>
 
-      <div class="counter" id="counter">
-        📦 Total Entries: 1
-      </div>
+    <!-- EXCEL TABLE -->
 
-      <!-- ROWS -->
-      <div id="rows"></div>
+    <div class="table-wrapper">
 
-      <!-- BUTTONS -->
-      <div class="buttons">
+      <table class="excel-table">
 
-        <button
-          type="button"
-          class="add-btn"
-          onclick="addRow()">
-          ➕ ADD MORE
-        </button>
+        <thead>
+          <tr>
+            <th style="width:48px;">#</th>
+            <th>📧 GMAIL</th>
+            <th>🔑 PASS</th>
+            <th style="width:58px;">❌</th>
+          </tr>
+        </thead>
 
-        <button
-          type="button"
-          class="submit-btn"
-          onclick="submitAll()">
-          📤 SUBMIT ALL
-        </button>
+        <tbody id="rows"></tbody>
 
-      </div>
+      </table>
 
-      <!-- MESSAGE -->
-      <div id="message" class="message"></div>
+    </div>
 
-      <div class="info">
-        📧 Enter Gmail address and your PASS value.<br>
-        PASS accepts letters, numbers, spaces and symbols.
-      </div>
 
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+      <button
+        type="button"
+        class="add-btn"
+        id="addButton"
+        onclick="addRow()">
+        ➕ ADD MORE
+      </button>
+
+      <button
+        type="button"
+        class="submit-btn"
+        id="submitButton"
+        onclick="submitAll()">
+        📤 SUBMIT ALL
+      </button>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div id="message" class="message"></div>
+
+
+    <div class="info">
+      📧 Gmail must be a valid @gmail.com address.<br>
+      🔑 PASS accepts any text, number, space or symbol.
     </div>
 
   </div>
 
 
-  <script>
+  <!-- SUCCESS SCREEN -->
 
-    let rowCount = 0;
+  <div class="card success-screen" id="successScreen">
+
+    <div class="success-icon">
+      ✅
+    </div>
+
+    <div class="success-title">
+      SUBMISSION CONFIRMED
+    </div>
+
+    <div class="pending">
+      🟡 STATUS: PENDING
+    </div>
+
+    <div class="success-text">
+
+      Your submission has been successfully received.<br><br>
+
+      📦 <b id="successCount">0</b> entries submitted.<br>
+
+      ⏳ Your submission is currently under review.<br><br>
+
+      🕐 <b>Report will be available within 24 hours.</b>
+
+    </div>
+
+  </div>
+
+</div>
 
 
-    // =====================================
-    // TELEGRAM WEB APP SUPPORT
-    // =====================================
+<script>
 
-    if (window.Telegram && window.Telegram.WebApp) {
+  let rowCount = 0;
+  let submitted = false;
 
-      window.Telegram.WebApp.ready();
 
-      window.Telegram.WebApp.expand();
+  // =====================================
+  // TELEGRAM WEB APP
+  // =====================================
+
+  const tg =
+    window.Telegram &&
+    window.Telegram.WebApp
+      ? window.Telegram.WebApp
+      : null;
+
+
+  if (tg) {
+
+    tg.ready();
+
+    tg.expand();
+
+  }
+
+
+  // =====================================
+  // PAGE LOAD
+  // =====================================
+
+  window.addEventListener("load", function () {
+
+    addRow();
+
+  });
+
+
+  // =====================================
+  // ADD ROW
+  // =====================================
+
+  function addRow() {
+
+    if (submitted) return;
+
+    const tbody =
+      document.getElementById("rows");
+
+    rowCount++;
+
+    const tr =
+      document.createElement("tr");
+
+    tr.className = "data-row";
+
+    tr.dataset.rowId = rowCount;
+
+    tr.innerHTML = `
+
+      <td class="number-cell">
+        ${rowCount}
+      </td>
+
+      <td class="gmail-cell">
+
+        <input
+          type="text"
+          class="excel-input gmail-input"
+          placeholder="example@gmail.com"
+          autocomplete="off"
+          spellcheck="false"
+        >
+
+      </td>
+
+      <td class="pass-cell">
+
+        <input
+          type="text"
+          class="excel-input pass-input"
+          placeholder="Enter PASS"
+          autocomplete="off"
+          spellcheck="false"
+        >
+
+      </td>
+
+      <td class="action-cell">
+
+        <button
+          type="button"
+          class="remove-btn"
+          onclick="removeRow(this)"
+          ${tbody.children.length === 0 ? "disabled" : ""}>
+          ×
+        </button>
+
+      </td>
+
+    `;
+
+    tbody.appendChild(tr);
+
+    updateNumbers();
+
+    updateCounter();
+
+  }
+
+
+  // =====================================
+  // REMOVE ROW
+  // =====================================
+
+  function removeRow(button) {
+
+    if (submitted) return;
+
+    const rows =
+      document.querySelectorAll(".data-row");
+
+    if (rows.length <= 1) {
+
+      showMessage(
+        "❌ At least one entry is required.",
+        "error"
+      );
+
+      return;
 
     }
 
+    const row =
+      button.closest("tr");
 
-    // =====================================
-    // PAGE LOAD
-    // =====================================
+    if (row) {
 
-    window.addEventListener("load", function () {
+      row.remove();
 
-      addRow();
+    }
+
+    updateNumbers();
+
+    updateCounter();
+
+  }
+
+
+  // =====================================
+  // UPDATE NUMBERS
+  // =====================================
+
+  function updateNumbers() {
+
+    const rows =
+      document.querySelectorAll(".data-row");
+
+    rows.forEach(function(row, index) {
+
+      const numberCell =
+        row.querySelector(".number-cell");
+
+      numberCell.textContent =
+        index + 1;
+
+    });
+
+  }
+
+
+  // =====================================
+  // COUNTER
+  // =====================================
+
+  function updateCounter() {
+
+    const total =
+      document.querySelectorAll(".data-row").length;
+
+    document.getElementById("counter").textContent =
+      "📦 Total Entries: " + total;
+
+  }
+
+
+  // =====================================
+  // GMAIL VALIDATION
+  // =====================================
+
+  function isValidGmail(email) {
+
+    return /^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email);
+
+  }
+
+
+  // =====================================
+  // SHOW MESSAGE
+  // =====================================
+
+  function showMessage(text, type) {
+
+    const message =
+      document.getElementById("message");
+
+    message.className = "message";
+
+    if (type === "success") {
+
+      message.classList.add("success");
+
+    } else {
+
+      message.classList.add("error-message");
+
+    }
+
+    message.innerHTML = text;
+
+    message.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+  }
+
+
+  // =====================================
+  // SUBMIT ALL
+  // =====================================
+
+  function submitAll() {
+
+    if (submitted) return;
+
+    const rows =
+      document.querySelectorAll(".data-row");
+
+    const submissions = [];
+
+    const usedEmails = new Set();
+
+    let hasError = false;
+
+
+    rows.forEach(function(row) {
+
+      const gmailInput =
+        row.querySelector(".gmail-input");
+
+      const passInput =
+        row.querySelector(".pass-input");
+
+
+      const gmail =
+        gmailInput.value.trim().toLowerCase();
+
+      /*
+       * PASS IS NORMAL TEXT.
+       * NO FORMAT VALIDATION.
+       */
+
+      const pass =
+        passInput.value.trim();
+
+
+      gmailInput.classList.remove("error");
+
+      passInput.classList.remove("error");
+
+
+      // Gmail empty
+
+      if (!gmail) {
+
+        gmailInput.classList.add("error");
+
+        hasError = true;
+
+        return;
+
+      }
+
+
+      // Gmail format
+
+      if (!isValidGmail(gmail)) {
+
+        gmailInput.classList.add("error");
+
+        hasError = true;
+
+        return;
+
+      }
+
+
+      // PASS empty
+
+      if (!pass) {
+
+        passInput.classList.add("error");
+
+        hasError = true;
+
+        return;
+
+      }
+
+
+      // Duplicate Gmail
+
+      if (usedEmails.has(gmail)) {
+
+        gmailInput.classList.add("error");
+
+        hasError = true;
+
+        return;
+
+      }
+
+
+      usedEmails.add(gmail);
+
+
+      submissions.push({
+
+        gmail: gmail,
+
+        pass: pass
+
+      });
 
     });
 
 
-    // =====================================
-    // ADD NEW ROW
-    // =====================================
+    // Validation error
 
-    function addRow() {
-
-      const rowsContainer =
-        document.getElementById("rows");
-
-      rowCount++;
-
-      const row =
-        document.createElement("div");
-
-      row.className = "row";
-
-      row.id = "row-" + rowCount;
-
-      row.innerHTML = `
-
-        <div class="row-number">
-          #${rowCount}
-        </div>
-
-        ${
-          rowCount > 1
-            ? `
-              <button
-                type="button"
-                class="remove-btn"
-                onclick="removeRow(${rowCount})">
-                ×
-              </button>
-            `
-            : ""
-        }
-
-        <div class="field">
-
-          <label>
-            📧 Gmail Address
-          </label>
-
-          <input
-            type="email"
-            class="gmail-input"
-            placeholder="example@gmail.com"
-            autocomplete="off"
-          >
-
-        </div>
-
-        <div class="field">
-
-          <label>
-            🔑 PASS
-          </label>
-
-          <input
-            type="text"
-            class="pass-input"
-            placeholder="Enter PASS"
-            autocomplete="off"
-          >
-
-        </div>
-
-      `;
-
-      rowsContainer.appendChild(row);
-
-      updateCounter();
-
-    }
-
-
-    // =====================================
-    // REMOVE ROW
-    // =====================================
-
-    function removeRow(id) {
-
-      const row =
-        document.getElementById("row-" + id);
-
-      if (row) {
-
-        row.remove();
-
-      }
-
-      renumberRows();
-
-      updateCounter();
-
-    }
-
-
-    // =====================================
-    // RENUMBER ROWS
-    // =====================================
-
-    function renumberRows() {
-
-      const rows =
-        document.querySelectorAll(".row");
-
-      rows.forEach(function (row, index) {
-
-        const number =
-          row.querySelector(".row-number");
-
-        number.textContent =
-          "#" + (index + 1);
-
-      });
-
-    }
-
-
-    // =====================================
-    // UPDATE COUNTER
-    // =====================================
-
-    function updateCounter() {
-
-      const total =
-        document.querySelectorAll(".row").length;
-
-      document.getElementById("counter").textContent =
-        "📦 Total Entries: " + total;
-
-    }
-
-
-    // =====================================
-    // GMAIL VALIDATION
-    // =====================================
-
-    function isValidGmail(email) {
-
-      const pattern =
-        /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-
-      return pattern.test(email);
-
-    }
-
-
-    // =====================================
-    // SHOW MESSAGE
-    // =====================================
-
-    function showMessage(text, type) {
-
-      const message =
-        document.getElementById("message");
-
-      message.className = "message";
-
-      if (type === "success") {
-
-        message.classList.add("success");
-
-      } else {
-
-        message.classList.add("error-message");
-
-      }
-
-      message.innerHTML = text;
-
-      message.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
-
-    }
-
-
-    // =====================================
-    // SUBMIT ALL
-    // =====================================
-
-    function submitAll() {
-
-      const rows =
-        document.querySelectorAll(".row");
-
-      const submissions = [];
-
-      const usedEmails =
-        new Set();
-
-      let hasError = false;
-
-
-      rows.forEach(function (row) {
-
-        const gmailInput =
-          row.querySelector(".gmail-input");
-
-        const passInput =
-          row.querySelector(".pass-input");
-
-
-        const gmail =
-          gmailInput.value.trim().toLowerCase();
-
-        /*
-         * PASS is a normal text field.
-         * No character-format restriction.
-         */
-
-        const pass =
-          passInput.value.trim();
-
-
-        // Reset errors
-
-        gmailInput.classList.remove("error");
-
-        passInput.classList.remove("error");
-
-
-        // =================================
-        // GMAIL EMPTY
-        // =================================
-
-        if (!gmail) {
-
-          gmailInput.classList.add("error");
-
-          hasError = true;
-
-          return;
-
-        }
-
-
-        // =================================
-        // GMAIL FORMAT
-        // =================================
-
-        if (!isValidGmail(gmail)) {
-
-          gmailInput.classList.add("error");
-
-          hasError = true;
-
-          return;
-
-        }
-
-
-        // =================================
-        // PASS EMPTY
-        // =================================
-
-        if (!pass) {
-
-          passInput.classList.add("error");
-
-          hasError = true;
-
-          return;
-
-        }
-
-
-        // =================================
-        // DUPLICATE GMAIL
-        // =================================
-
-        if (usedEmails.has(gmail)) {
-
-          gmailInput.classList.add("error");
-
-          hasError = true;
-
-          return;
-
-        }
-
-
-        usedEmails.add(gmail);
-
-
-        // =================================
-        // SAVE DATA
-        // =================================
-
-        submissions.push({
-
-          gmail: gmail,
-
-          pass: pass
-
-        });
-
-      });
-
-
-      // =====================================
-      // VALIDATION ERROR
-      // =====================================
-
-      if (hasError) {
-
-        showMessage(
-          "❌ Please check the highlighted fields. Make sure every Gmail and PASS is filled correctly.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      // =====================================
-      // EMPTY SUBMISSION
-      // =====================================
-
-      if (submissions.length === 0) {
-
-        showMessage(
-          "❌ Please add at least one entry.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      // =====================================
-      // STEP 1 ONLY
-      // =====================================
-      //
-      // Backend connection is not added yet.
-      //
-      // The collected data can be checked
-      // from the browser console.
-      //
-      // STEP 2 will connect the Web App
-      // to the Telegram Bot.
-      //
-
-      console.log(
-        "Gmail Submissions:",
-        submissions
-      );
-
-
-      // =====================================
-      // TEMPORARY SUCCESS
-      // =====================================
+    if (hasError) {
 
       showMessage(
-        "✅ " +
-        submissions.length +
-        " submission(s) are ready.<br><br>" +
-        "🔄 Telegram Bot connection will be added in the next step.",
-        "success"
+        "❌ Please check the highlighted fields. Make sure every Gmail and PASS is filled.",
+        "error"
       );
+
+      return;
 
     }
 
-  </script>
+
+    if (submissions.length === 0) {
+
+      showMessage(
+        "❌ Please add at least one entry.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    // =================================
+    // DISABLE BUTTONS
+    // =================================
+
+    document.getElementById("submitButton").disabled = true;
+
+    document.getElementById("addButton").disabled = true;
+
+
+    /*
+     * Telegram Web App DATA
+     *
+     * We send the submission data to the
+     * Telegram bot using sendData().
+     *
+     * The bot-side command must receive this
+     * data and show the Pending confirmation.
+     */
+
+    const payload = {
+
+      type: "gmail_submission",
+
+      status: "pending",
+
+      total: submissions.length,
+
+      entries: submissions
+
+    };
+
+
+    // =================================
+    // TELEGRAM
+    // =================================
+
+    if (tg) {
+
+      try {
+
+        tg.sendData(
+          JSON.stringify(payload)
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("submitButton").disabled = false;
+
+        document.getElementById("addButton").disabled = false;
+
+        showMessage(
+          "❌ Unable to send submission to Telegram. Please try again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    // =================================
+    // LOCAL SUCCESS SCREEN
+    // =================================
+
+    submitted = true;
+
+    document.getElementById("successCount").textContent =
+      submissions.length;
+
+    document.getElementById("mainCard").style.display =
+      "none";
+
+    document.getElementById("successScreen").style.display =
+      "block";
+
+
+    /*
+     * Close Web App after a short delay.
+     *
+     * Telegram will receive the data first.
+     */
+
+    if (tg) {
+
+      setTimeout(function() {
+
+        try {
+
+          tg.close();
+
+        } catch (e) {
+
+          // Ignore
+
+        }
+
+      }, 1200);
+
+    }
+
+  }
+
+</script>
 
 </body>
-  </html>
+</html>
