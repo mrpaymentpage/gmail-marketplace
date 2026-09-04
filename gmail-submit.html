@@ -496,20 +496,6 @@ if (tg) {
 
 
 /* ==========================================
-   WEBHOOK URL
-========================================== */
-
-const urlParams =
-  new URLSearchParams(
-    window.location.search
-  );
-
-
-const webhookUrl =
-  urlParams.get("webhook");
-
-
-/* ==========================================
    VARIABLES
 ========================================== */
 
@@ -754,19 +740,19 @@ function showMessage(text) {
    SUBMIT
 ========================================== */
 
-async function submitAll() {
+function submitAll() {
 
   if (submitted) return;
 
 
   /* ========================================
-     WEBHOOK CHECK
+     TELEGRAM CHECK
   ======================================== */
 
-  if (!webhookUrl) {
+  if (!tg) {
 
     showMessage(
-      "❌ Webhook URL পাওয়া যায়নি। অনুগ্রহ করে Telegram-এর SUBMIT NEW GMAIL বাটন দিয়ে Web App খুলুন।"
+      "❌ Telegram Web App পাওয়া যায়নি। অনুগ্রহ করে Telegram-এর SUBMIT NEW GMAIL বাটন দিয়ে Web App খুলুন।"
     );
 
     return;
@@ -935,7 +921,6 @@ async function submitAll() {
   ======================================== */
 
   const telegramUser =
-    tg &&
     tg.initDataUnsafe &&
     tg.initDataUnsafe.user
       ? tg.initDataUnsafe.user
@@ -989,35 +974,15 @@ async function submitAll() {
 
 
   /* ========================================
-     SEND TO BOTS.BUSINESS WEBHOOK
+     SEND DATA TO TELEGRAM BOT
   ======================================== */
 
   try {
 
-
-    await fetch(
-      webhookUrl,
-
-      {
-
-        method: "POST",
-
-        mode: "no-cors",
-
-        headers: {
-
-          "Content-Type":
-            "text/plain;charset=UTF-8"
-
-        },
-
-        body:
-          JSON.stringify(
-            payload
-          )
-
-      }
-
+    tg.sendData(
+      JSON.stringify(
+        payload
+      )
     );
 
 
@@ -1055,11 +1020,7 @@ async function submitAll() {
 
         try {
 
-          if (tg) {
-
-            tg.close();
-
-          }
+          tg.close();
 
         } catch (e) {
 
