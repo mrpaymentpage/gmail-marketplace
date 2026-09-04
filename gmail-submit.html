@@ -79,10 +79,6 @@
       font-weight: 800;
     }
 
-    /* ================================
-       EXCEL TABLE
-    ================================= */
-
     .table-wrapper {
       width: 100%;
       overflow-x: auto;
@@ -269,10 +265,6 @@
       text-align: center;
     }
 
-    /* ================================
-       SUCCESS SCREEN
-    ================================= */
-
     .success-screen {
       display: none;
       text-align: center;
@@ -340,14 +332,11 @@
 
 <div class="container">
 
-  <!-- HEADER -->
   <div class="header">
     <div class="logo">RS NETWORK</div>
     <div class="subtitle">GMAIL MARKETPLACE</div>
   </div>
 
-
-  <!-- MAIN CARD -->
   <div class="card" id="mainCard">
 
     <div class="title">
@@ -355,15 +344,12 @@
     </div>
 
     <div class="description">
-      Add your Gmail and PASS below. Add multiple entries and submit them together.
+      Add your Gmail and PASS / NOTE below. Add multiple entries and submit them together.
     </div>
 
     <div class="counter" id="counter">
       📦 Total Entries: 1
     </div>
-
-
-    <!-- EXCEL TABLE -->
 
     <div class="table-wrapper">
 
@@ -373,7 +359,7 @@
           <tr>
             <th style="width:48px;">#</th>
             <th>📧 GMAIL</th>
-            <th>🔑 PASS</th>
+            <th>🔑 PASS / NOTE</th>
             <th style="width:58px;">❌</th>
           </tr>
         </thead>
@@ -383,9 +369,6 @@
       </table>
 
     </div>
-
-
-    <!-- BUTTONS -->
 
     <div class="buttons">
 
@@ -407,21 +390,14 @@
 
     </div>
 
-
-    <!-- MESSAGE -->
-
     <div id="message" class="message"></div>
-
 
     <div class="info">
       📧 Gmail must be a valid @gmail.com address.<br>
-      🔑 PASS accepts any text, number, space or symbol.
+      🔑 PASS / NOTE accepts any text, number, space or symbol.
     </div>
 
   </div>
-
-
-  <!-- SUCCESS SCREEN -->
 
   <div class="card success-screen" id="successScreen">
 
@@ -445,7 +421,9 @@
 
       ⏳ Your submission is currently under review.<br><br>
 
-      🕐 <b>Report will be available within 24 hours.</b>
+      🕐 <b>Report will be available within 24 hours.</b><br><br>
+
+      Telegram will open automatically in 3 seconds.
 
     </div>
 
@@ -456,472 +434,394 @@
 
 <script>
 
-  let rowCount = 0;
-  let submitted = false;
+let rowCount = 0;
+let submitted = false;
+
+const tg =
+  window.Telegram &&
+  window.Telegram.WebApp
+    ? window.Telegram.WebApp
+    : null;
 
 
-  // =====================================
-  // TELEGRAM WEB APP
-  // =====================================
-
-  const tg =
-    window.Telegram &&
-    window.Telegram.WebApp
-      ? window.Telegram.WebApp
-      : null;
+if (tg) {
+  tg.ready();
+  tg.expand();
+}
 
 
-  if (tg) {
+window.addEventListener("load", function () {
+  addRow();
+});
 
-    tg.ready();
 
-    tg.expand();
+function addRow() {
 
+  if (submitted) return;
+
+  const tbody = document.getElementById("rows");
+
+  rowCount++;
+
+  const tr = document.createElement("tr");
+
+  tr.className = "data-row";
+  tr.dataset.rowId = rowCount;
+
+  tr.innerHTML = `
+
+    <td class="number-cell">
+      ${rowCount}
+    </td>
+
+    <td class="gmail-cell">
+
+      <input
+        type="text"
+        class="excel-input gmail-input"
+        placeholder="example@gmail.com"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+    </td>
+
+    <td class="pass-cell">
+
+      <input
+        type="text"
+        class="excel-input pass-input"
+        placeholder="Enter PASS / NOTE"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+    </td>
+
+    <td class="action-cell">
+
+      <button
+        type="button"
+        class="remove-btn"
+        onclick="removeRow(this)"
+        ${tbody.children.length === 0 ? "disabled" : ""}>
+        ×
+      </button>
+
+    </td>
+
+  `;
+
+  tbody.appendChild(tr);
+
+  updateNumbers();
+  updateCounter();
+}
+
+
+function removeRow(button) {
+
+  if (submitted) return;
+
+  const rows =
+    document.querySelectorAll(".data-row");
+
+  if (rows.length <= 1) {
+
+    showMessage(
+      "❌ At least one entry is required.",
+      "error"
+    );
+
+    return;
   }
 
+  const row = button.closest("tr");
 
-  // =====================================
-  // PAGE LOAD
-  // =====================================
+  if (row) {
+    row.remove();
+  }
 
-  window.addEventListener("load", function () {
+  updateNumbers();
+  updateCounter();
+}
 
-    addRow();
+
+function updateNumbers() {
+
+  const rows =
+    document.querySelectorAll(".data-row");
+
+  rows.forEach(function(row, index) {
+
+    row.querySelector(".number-cell").textContent =
+      index + 1;
+
+  });
+}
+
+
+function updateCounter() {
+
+  const total =
+    document.querySelectorAll(".data-row").length;
+
+  document.getElementById("counter").textContent =
+    "📦 Total Entries: " + total;
+}
+
+
+function isValidGmail(email) {
+
+  return /^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email);
+
+}
+
+
+function showMessage(text, type) {
+
+  const message =
+    document.getElementById("message");
+
+  message.className = "message";
+
+  if (type === "success") {
+    message.classList.add("success");
+  } else {
+    message.classList.add("error-message");
+  }
+
+  message.innerHTML = text;
+
+  message.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+}
+
+
+function submitAll() {
+
+  if (submitted) return;
+
+  const rows =
+    document.querySelectorAll(".data-row");
+
+  const submissions = [];
+
+  const usedEmails = new Set();
+
+  let hasError = false;
+
+
+  rows.forEach(function(row) {
+
+    const gmailInput =
+      row.querySelector(".gmail-input");
+
+    const passInput =
+      row.querySelector(".pass-input");
+
+
+    const gmail =
+      gmailInput.value.trim().toLowerCase();
+
+
+    /*
+     * PASS / NOTE is accepted as normal text.
+     *
+     * IMPORTANT:
+     * It is NOT sent to Telegram/Bot.
+     */
+
+    const pass =
+      passInput.value.trim();
+
+
+    gmailInput.classList.remove("error");
+    passInput.classList.remove("error");
+
+
+    if (!gmail) {
+
+      gmailInput.classList.add("error");
+
+      hasError = true;
+
+      return;
+    }
+
+
+    if (!isValidGmail(gmail)) {
+
+      gmailInput.classList.add("error");
+
+      hasError = true;
+
+      return;
+    }
+
+
+    if (!pass) {
+
+      passInput.classList.add("error");
+
+      hasError = true;
+
+      return;
+    }
+
+
+    if (usedEmails.has(gmail)) {
+
+      gmailInput.classList.add("error");
+
+      hasError = true;
+
+      return;
+    }
+
+
+    usedEmails.add(gmail);
+
+
+    /*
+     * ONLY Gmail is sent.
+     *
+     * PASS / NOTE is intentionally excluded.
+     */
+
+    submissions.push({
+      gmail: gmail
+    });
 
   });
 
 
-  // =====================================
-  // ADD ROW
-  // =====================================
+  if (hasError) {
 
-  function addRow() {
+    showMessage(
+      "❌ Please check the highlighted fields. Make sure every Gmail and PASS / NOTE is filled.",
+      "error"
+    );
 
-    if (submitted) return;
-
-    const tbody =
-      document.getElementById("rows");
-
-    rowCount++;
-
-    const tr =
-      document.createElement("tr");
-
-    tr.className = "data-row";
-
-    tr.dataset.rowId = rowCount;
-
-    tr.innerHTML = `
-
-      <td class="number-cell">
-        ${rowCount}
-      </td>
-
-      <td class="gmail-cell">
-
-        <input
-          type="text"
-          class="excel-input gmail-input"
-          placeholder="example@gmail.com"
-          autocomplete="off"
-          spellcheck="false"
-        >
-
-      </td>
-
-      <td class="pass-cell">
-
-        <input
-          type="text"
-          class="excel-input pass-input"
-          placeholder="Enter PASS"
-          autocomplete="off"
-          spellcheck="false"
-        >
-
-      </td>
-
-      <td class="action-cell">
-
-        <button
-          type="button"
-          class="remove-btn"
-          onclick="removeRow(this)"
-          ${tbody.children.length === 0 ? "disabled" : ""}>
-          ×
-        </button>
-
-      </td>
-
-    `;
-
-    tbody.appendChild(tr);
-
-    updateNumbers();
-
-    updateCounter();
-
+    return;
   }
 
 
-  // =====================================
-  // REMOVE ROW
-  // =====================================
+  if (submissions.length === 0) {
 
-  function removeRow(button) {
+    showMessage(
+      "❌ Please add at least one entry.",
+      "error"
+    );
 
-    if (submitted) return;
-
-    const rows =
-      document.querySelectorAll(".data-row");
-
-    if (rows.length <= 1) {
-
-      showMessage(
-        "❌ At least one entry is required.",
-        "error"
-      );
-
-      return;
-
-    }
-
-    const row =
-      button.closest("tr");
-
-    if (row) {
-
-      row.remove();
-
-    }
-
-    updateNumbers();
-
-    updateCounter();
-
+    return;
   }
 
 
-  // =====================================
-  // UPDATE NUMBERS
-  // =====================================
+  document.getElementById("submitButton").disabled = true;
+  document.getElementById("addButton").disabled = true;
 
-  function updateNumbers() {
 
-    const rows =
-      document.querySelectorAll(".data-row");
+  const payload = {
 
-    rows.forEach(function(row, index) {
+    type: "gmail_submission",
 
-      const numberCell =
-        row.querySelector(".number-cell");
+    status: "pending",
 
-      numberCell.textContent =
-        index + 1;
+    total: submissions.length,
 
-    });
+    user_id:
+      tg &&
+      tg.initDataUnsafe &&
+      tg.initDataUnsafe.user
+        ? String(tg.initDataUnsafe.user.id)
+        : "",
 
+    entries: submissions
+
+  };
+
+
+  /*
+   * TELEGRAM WEB APP
+   *
+   * sendData() works when this page is opened
+   * from a Telegram Keyboard Web App button.
+   */
+
+  if (!tg) {
+
+    document.getElementById("submitButton").disabled = false;
+    document.getElementById("addButton").disabled = false;
+
+    showMessage(
+      "❌ Please open this page from the Telegram bot.",
+      "error"
+    );
+
+    return;
   }
 
 
-  // =====================================
-  // COUNTER
-  // =====================================
+  try {
 
-  function updateCounter() {
+    tg.sendData(
+      JSON.stringify(payload)
+    );
 
-    const total =
-      document.querySelectorAll(".data-row").length;
+  } catch (error) {
 
-    document.getElementById("counter").textContent =
-      "📦 Total Entries: " + total;
+    console.error(error);
 
+    document.getElementById("submitButton").disabled = false;
+    document.getElementById("addButton").disabled = false;
+
+    showMessage(
+      "❌ Unable to send submission to Telegram. Please try again.",
+      "error"
+    );
+
+    return;
   }
 
 
-  // =====================================
-  // GMAIL VALIDATION
-  // =====================================
-
-  function isValidGmail(email) {
-
-    return /^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email);
-
-  }
+  submitted = true;
 
 
-  // =====================================
-  // SHOW MESSAGE
-  // =====================================
+  document.getElementById("successCount").textContent =
+    submissions.length;
 
-  function showMessage(text, type) {
 
-    const message =
-      document.getElementById("message");
+  document.getElementById("mainCard").style.display =
+    "none";
 
-    message.className = "message";
 
-    if (type === "success") {
+  document.getElementById("successScreen").style.display =
+    "block";
 
-      message.classList.add("success");
 
-    } else {
+  /*
+   * RETURN TO TELEGRAM AFTER 3 SECONDS
+   */
 
-      message.classList.add("error-message");
+  setTimeout(function() {
+
+    try {
+
+      tg.close();
+
+    } catch (e) {
+
+      console.log(e);
 
     }
 
-    message.innerHTML = text;
+  }, 3000);
 
-    message.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-
-  }
-
-
-  // =====================================
-  // SUBMIT ALL
-  // =====================================
-
-  function submitAll() {
-
-    if (submitted) return;
-
-    const rows =
-      document.querySelectorAll(".data-row");
-
-    const submissions = [];
-
-    const usedEmails = new Set();
-
-    let hasError = false;
-
-
-    rows.forEach(function(row) {
-
-      const gmailInput =
-        row.querySelector(".gmail-input");
-
-      const passInput =
-        row.querySelector(".pass-input");
-
-
-      const gmail =
-        gmailInput.value.trim().toLowerCase();
-
-      /*
-       * PASS IS NORMAL TEXT.
-       * NO FORMAT VALIDATION.
-       */
-
-      const pass =
-        passInput.value.trim();
-
-
-      gmailInput.classList.remove("error");
-
-      passInput.classList.remove("error");
-
-
-      // Gmail empty
-
-      if (!gmail) {
-
-        gmailInput.classList.add("error");
-
-        hasError = true;
-
-        return;
-
-      }
-
-
-      // Gmail format
-
-      if (!isValidGmail(gmail)) {
-
-        gmailInput.classList.add("error");
-
-        hasError = true;
-
-        return;
-
-      }
-
-
-      // PASS empty
-
-      if (!pass) {
-
-        passInput.classList.add("error");
-
-        hasError = true;
-
-        return;
-
-      }
-
-
-      // Duplicate Gmail
-
-      if (usedEmails.has(gmail)) {
-
-        gmailInput.classList.add("error");
-
-        hasError = true;
-
-        return;
-
-      }
-
-
-      usedEmails.add(gmail);
-
-
-      submissions.push({
-
-        gmail: gmail,
-
-        pass: pass
-
-      });
-
-    });
-
-
-    // Validation error
-
-    if (hasError) {
-
-      showMessage(
-        "❌ Please check the highlighted fields. Make sure every Gmail and PASS is filled.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if (submissions.length === 0) {
-
-      showMessage(
-        "❌ Please add at least one entry.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    // =================================
-    // DISABLE BUTTONS
-    // =================================
-
-    document.getElementById("submitButton").disabled = true;
-
-    document.getElementById("addButton").disabled = true;
-
-
-    /*
-     * Telegram Web App DATA
-     *
-     * We send the submission data to the
-     * Telegram bot using sendData().
-     *
-     * The bot-side command must receive this
-     * data and show the Pending confirmation.
-     */
-
-    const payload = {
-
-      type: "gmail_submission",
-
-      status: "pending",
-
-      total: submissions.length,
-
-      entries: submissions
-
-    };
-
-
-    // =================================
-    // TELEGRAM
-    // =================================
-
-    if (tg) {
-
-      try {
-
-        tg.sendData(
-          JSON.stringify(payload)
-        );
-
-      } catch (error) {
-
-        console.error(error);
-
-        document.getElementById("submitButton").disabled = false;
-
-        document.getElementById("addButton").disabled = false;
-
-        showMessage(
-          "❌ Unable to send submission to Telegram. Please try again.",
-          "error"
-        );
-
-        return;
-
-      }
-
-    }
-
-
-    // =================================
-    // LOCAL SUCCESS SCREEN
-    // =================================
-
-    submitted = true;
-
-    document.getElementById("successCount").textContent =
-      submissions.length;
-
-    document.getElementById("mainCard").style.display =
-      "none";
-
-    document.getElementById("successScreen").style.display =
-      "block";
-
-
-    /*
-     * Close Web App after a short delay.
-     *
-     * Telegram will receive the data first.
-     */
-
-    if (tg) {
-
-      setTimeout(function() {
-
-        try {
-
-          tg.close();
-
-        } catch (e) {
-
-          // Ignore
-
-        }
-
-      }, 1200);
-
-    }
-
-  }
+}
 
 </script>
 
