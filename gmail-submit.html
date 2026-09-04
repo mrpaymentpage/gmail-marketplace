@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>RS NETWORK - Gmail Marketplace</title>  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>RS NETWORK - Gmail Marketplace</title>  <script src="https://telegram.org/js/telegram-web-app.js"></script>  <style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -100,10 +100,6 @@
       text-align: center;
     }
 
-    .excel-table th:last-child {
-      border-right: none;
-    }
-
     .excel-table td {
       height: 48px;
       padding: 4px;
@@ -114,10 +110,6 @@
 
     .excel-table tr:last-child td {
       border-bottom: none;
-    }
-
-    .excel-table td:last-child {
-      border-right: none;
     }
 
     .number-cell {
@@ -154,11 +146,6 @@
       color: #111827;
     }
 
-    .excel-input:hover {
-      background: #f9fafb;
-      border-color: #e5e7eb;
-    }
-
     .excel-input:focus {
       background: #fff;
       border-color: #111827;
@@ -180,10 +167,6 @@
       font-size: 18px;
       font-weight: 900;
       cursor: pointer;
-    }
-
-    .remove-btn:hover {
-      background: #fecaca;
     }
 
     .buttons {
@@ -213,8 +196,7 @@
       color: white;
     }
 
-    .submit-btn:disabled,
-    .add-btn:disabled {
+    button:disabled {
       opacity: .55;
       cursor: not-allowed;
     }
@@ -229,27 +211,10 @@
       line-height: 1.55;
     }
 
-    .success {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-    }
-
     .error-message {
       display: block;
       background: #fee2e2;
       color: #991b1b;
-    }
-
-    .info {
-      margin-top: 14px;
-      padding: 11px;
-      background: #f9fafb;
-      border-radius: 9px;
-      color: #6b7280;
-      font-size: 11px;
-      line-height: 1.6;
-      text-align: center;
     }
 
     .success-screen {
@@ -284,6 +249,17 @@
       color: #6b7280;
       font-size: 13px;
       line-height: 1.7;
+    }
+
+    .info {
+      margin-top: 14px;
+      padding: 11px;
+      background: #f9fafb;
+      border-radius: 9px;
+      color: #6b7280;
+      font-size: 11px;
+      line-height: 1.6;
+      text-align: center;
     }
 
     @media (max-width: 480px) {
@@ -323,7 +299,7 @@
 </div>
 
 <div class="counter" id="counter">
-  📦 Total Entries: 1
+  📦 Total Entries: 0
 </div>
 
 <div class="table-wrapper">
@@ -372,7 +348,9 @@
   🔑 PASS / NOTE accepts any text, number, space or symbol.
 </div>
 
-  </div>  <div class="card success-screen" id="successScreen"><div class="success-icon">✅</div>
+  </div>  <div class="card success-screen" id="successScreen"><div class="success-icon">
+  ✅
+</div>
 
 <div class="success-title">
   SUBMISSION CONFIRMED
@@ -396,31 +374,39 @@
 
 </div>
 
-  </div></div><!-- Telegram Web App Library --><script src="https://telegram.org/js/telegram-web-app.js"></script><script>
-
-let rowCount = 0;
-let submitted = false;
-
+  </div></div><script>
 
 /* ==========================================
-   TELEGRAM WEB APP
+   TELEGRAM
 ========================================== */
 
-const tg = window.Telegram
-  ? window.Telegram.WebApp
-  : null;
+const tg =
+  window.Telegram &&
+  window.Telegram.WebApp
+    ? window.Telegram.WebApp
+    : null;
 
 
 if (tg) {
 
   tg.ready();
+
   tg.expand();
 
 }
 
 
 /* ==========================================
-   FIRST ROW
+   VARIABLES
+========================================== */
+
+let rowCount = 0;
+
+let submitted = false;
+
+
+/* ==========================================
+   START
 ========================================== */
 
 window.addEventListener("load", function () {
@@ -446,10 +432,8 @@ function addRow() {
   const tr =
     document.createElement("tr");
 
-  tr.className = "data-row";
-
-  tr.dataset.rowId =
-    rowCount;
+  tr.className =
+    "data-row";
 
   tr.innerHTML = `
 
@@ -497,13 +481,14 @@ function addRow() {
   tbody.appendChild(tr);
 
   updateNumbers();
+
   updateCounter();
 
 }
 
 
 /* ==========================================
-   REMOVE ROW
+   REMOVE
 ========================================== */
 
 function removeRow(button) {
@@ -521,23 +506,27 @@ function removeRow(button) {
     );
 
     return;
+
   }
 
   const row =
     button.closest("tr");
 
   if (row) {
+
     row.remove();
+
   }
 
   updateNumbers();
+
   updateCounter();
 
 }
 
 
 /* ==========================================
-   UPDATE NUMBERS
+   NUMBERS
 ========================================== */
 
 function updateNumbers() {
@@ -549,7 +538,8 @@ function updateNumbers() {
 
     row.querySelector(
       ".number-cell"
-    ).textContent = index + 1;
+    ).textContent =
+      index + 1;
 
   });
 
@@ -574,7 +564,7 @@ function updateCounter() {
 
 
 /* ==========================================
-   GMAIL VALIDATION
+   GMAIL CHECK
 ========================================== */
 
 function isValidGmail(email) {
@@ -588,26 +578,16 @@ function isValidGmail(email) {
    MESSAGE
 ========================================== */
 
-function showMessage(text, type) {
+function showMessage(text) {
 
   const message =
     document.getElementById("message");
 
-  message.className = "message";
+  message.className =
+    "message error-message";
 
-  if (type === "success") {
-
-    message.classList.add("success");
-
-  } else {
-
-    message.classList.add(
-      "error-message"
-    );
-
-  }
-
-  message.innerHTML = text;
+  message.innerHTML =
+    text;
 
   message.scrollIntoView({
     behavior: "smooth",
@@ -618,7 +598,7 @@ function showMessage(text, type) {
 
 
 /* ==========================================
-   SUBMIT ALL
+   SUBMIT
 ========================================== */
 
 function submitAll() {
@@ -626,18 +606,29 @@ function submitAll() {
   if (submitted) return;
 
 
-  /* ----------------------------------------
-     TELEGRAM CHECK
-  ---------------------------------------- */
+  /*
+   * Telegram WebApp must exist because
+   * Telegram is the only transport used
+   * by this version.
+   */
+
+  if (!tg) {
+
+    showMessage(
+      "❌ Telegram Web App পাওয়া যায়নি। অনুগ্রহ করে Telegram Bot-এর SUBMIT NEW GMAIL বাটন দিয়ে এই পেজটি খুলুন।"
+    );
+
+    return;
+
+  }
+
 
   if (
-    !tg ||
     typeof tg.sendData !== "function"
   ) {
 
     showMessage(
-      "❌ এই পেজটি Telegram Bot-এর Web App Button দিয়ে খুলতে হবে।",
-      "error"
+      "❌ Telegram Web App sendData unavailable. Telegram app থেকে আবার খুলুন।"
     );
 
     return;
@@ -648,6 +639,7 @@ function submitAll() {
   const rows =
     document.querySelectorAll(".data-row");
 
+
   const submissions = [];
 
   const usedEmails =
@@ -656,9 +648,9 @@ function submitAll() {
   let hasError = false;
 
 
-  /* ----------------------------------------
-     CHECK EVERY ROW
-  ---------------------------------------- */
+  /* ========================================
+     VALIDATE
+  ======================================== */
 
   rows.forEach(function(row) {
 
@@ -748,10 +740,8 @@ function submitAll() {
 
 
     /*
-     * IMPORTANT:
-     *
-     * PASS / NOTE is accepted by the page
-     * but is NOT sent to Telegram.
+     * PASS / NOTE is deliberately
+     * NOT transmitted.
      */
 
     submissions.push({
@@ -763,15 +753,14 @@ function submitAll() {
   });
 
 
-  /* ----------------------------------------
-     VALIDATION ERROR
-  ---------------------------------------- */
+  /* ========================================
+     ERROR
+  ======================================== */
 
   if (hasError) {
 
     showMessage(
-      "❌ Please check the highlighted fields. Make sure every Gmail and PASS / NOTE is filled.",
-      "error"
+      "❌ Please check the highlighted fields. Make sure every Gmail and PASS / NOTE is filled."
     );
 
     return;
@@ -782,8 +771,7 @@ function submitAll() {
   if (submissions.length === 0) {
 
     showMessage(
-      "❌ Please add at least one entry.",
-      "error"
+      "❌ Please add at least one entry."
     );
 
     return;
@@ -791,22 +779,9 @@ function submitAll() {
   }
 
 
-  /* ----------------------------------------
-     DISABLE BUTTONS
-  ---------------------------------------- */
-
-  document.getElementById(
-    "submitButton"
-  ).disabled = true;
-
-  document.getElementById(
-    "addButton"
-  ).disabled = true;
-
-
-  /* ----------------------------------------
-     CREATE TELEGRAM PAYLOAD
-  ---------------------------------------- */
+  /* ========================================
+     PAYLOAD
+  ======================================== */
 
   const telegramUser =
     tg.initDataUnsafe &&
@@ -828,7 +803,9 @@ function submitAll() {
 
     user_id:
       telegramUser
-        ? String(telegramUser.id)
+        ? String(
+            telegramUser.id
+          )
         : "",
 
     entries:
@@ -837,23 +814,38 @@ function submitAll() {
   };
 
 
-  /* ----------------------------------------
-     SEND TO BOT
-  ---------------------------------------- */
+  /* ========================================
+     BUTTONS OFF
+  ======================================== */
+
+  document.getElementById(
+    "submitButton"
+  ).disabled = true;
+
+  document.getElementById(
+    "addButton"
+  ).disabled = true;
+
+
+  /* ========================================
+     SEND
+  ======================================== */
 
   try {
 
     tg.sendData(
-      JSON.stringify(payload)
+      JSON.stringify(
+        payload
+      )
     );
 
 
     submitted = true;
 
 
-    /* --------------------------------------
-       SHOW SUCCESS
-    -------------------------------------- */
+    /* ======================================
+       SUCCESS
+    ====================================== */
 
     document.getElementById(
       "successCount"
@@ -873,9 +865,9 @@ function submitAll() {
       "block";
 
 
-    /* --------------------------------------
-       CLOSE WEB APP
-    -------------------------------------- */
+    /* ======================================
+       CLOSE
+    ====================================== */
 
     setTimeout(function() {
 
@@ -895,7 +887,6 @@ function submitAll() {
   } catch (error) {
 
     console.error(
-      "Telegram sendData error:",
       error
     );
 
@@ -910,8 +901,7 @@ function submitAll() {
 
 
     showMessage(
-      "❌ Submission পাঠানো যায়নি। আবার চেষ্টা করুন।",
-      "error"
+      "❌ Submission পাঠানো যায়নি। Telegram থেকে Web App-টি আবার খুলে চেষ্টা করুন।"
     );
 
   }
@@ -919,4 +909,4 @@ function submitAll() {
 }
 
 </script></body>
-</html>
+  </html>
