@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RS NETWORK - Gmail Marketplace</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #1f2937;
+      padding: 20px 12px 40px;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #111827, #374151);
+      color: white;
+      padding: 25px 20px;
+      border-radius: 18px;
+      text-align: center;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      margin-top: 7px;
+      font-size: 13px;
+      opacity: 0.85;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .description {
+      color: #6b7280;
+      font-size: 13px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .counter {
+      background: #f3f4f6;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .row {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 15px;
+      margin-bottom: 12px;
+      background: #fafafa;
+      position: relative;
+    }
+
+    .row-number {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #374151;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #374151;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+      background: white;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      border-color: #111827;
+      box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+    }
+
+    input.error {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .remove-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border: none;
+      background: #fee2e2;
+      color: #dc2626;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background: #fecaca;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      font-weight: 800;
+      border-radius: 11px;
+      padding: 14px;
+      font-size: 14px;
+    }
+
+    .add-btn {
+      flex: 1;
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .add-btn:hover {
+      background: #d1d5db;
+    }
+
+    .submit-btn {
+      flex: 1;
+      background: #111827;
+      color: white;
+    }
+
+    .submit-btn:hover {
+      background: #000000;
+    }
+
+    .message {
+      display: none;
+      padding: 13px;
+      border-radius: 10px;
+      margin-top: 15px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .success {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error-message {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .info {
+      margin-top: 18px;
+      padding: 13px;
+      background: #f9fafb;
+      border-radius: 10px;
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px 8px 30px;
+      }
+
+      .header {
+        padding: 22px 15px;
+      }
+
+      .card {
+        padding: 15px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .logo {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo">RS NETWORK</div>
+      <div class="subtitle">GMAIL MARKETPLACE</div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+
+      <div class="title">📋 BULK GMAIL SUBMISSION</div>
+
+      <div class="description">
+        Add your Gmail and PASS below. You can submit multiple
+        entries together.
+      </div>
+
+      <div class="counter" id="counter">
+        📦 Total Entries: 1
+      </div>
+
+      <!-- ROWS -->
+      <div id="rows"></div>
+
+      <!-- BUTTONS -->
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="add-btn"
+          onclick="addRow()">
+          ➕ ADD MORE
+        </button>
+
+        <button
+          type="button"
+          class="submit-btn"
+          onclick="submitAll()">
+          📤 SUBMIT ALL
+        </button>
+
+      </div>
+
+      <!-- MESSAGE -->
+      <div id="message" class="message"></div>
+
+      <div class="info">
+        📧 Enter Gmail address and your PASS value.<br>
+        PASS accepts letters, numbers, spaces and symbols.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    let rowCount = 0;
+
+
+    // =====================================
+    // TELEGRAM WEB APP SUPPORT
+    // =====================================
+
+    if (window.Telegram && window.Telegram.WebApp) {
+
+      window.Telegram.WebApp.ready();
+
+      window.Telegram.WebApp.expand();
+
+    }
+
+
+    // =====================================
+    // PAGE LOAD
+    // =====================================
+
+    window.addEventListener("load", function () {
+
+      addRow();
+
+    });
+
+
+    // =====================================
+    // ADD NEW ROW
+    // =====================================
+
+    function addRow() {
+
+      const rowsContainer =
+        document.getElementById("rows");
+
+      rowCount++;
+
+      const row =
+        document.createElement("div");
+
+      row.className = "row";
+
+      row.id = "row-" + rowCount;
+
+      row.innerHTML = `
+
+        <div class="row-number">
+          #${rowCount}
+        </div>
+
+        ${
+          rowCount > 1
+            ? `
+              <button
+                type="button"
+                class="remove-btn"
+                onclick="removeRow(${rowCount})">
+                ×
+              </button>
+            `
+            : ""
+        }
+
+        <div class="field">
+
+          <label>
+            📧 Gmail Address
+          </label>
+
+          <input
+            type="email"
+            class="gmail-input"
+            placeholder="example@gmail.com"
+            autocomplete="off"
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label>
+            🔑 PASS
+          </label>
+
+          <input
+            type="text"
+            class="pass-input"
+            placeholder="Enter PASS"
+            autocomplete="off"
+          >
+
+        </div>
+
+      `;
+
+      rowsContainer.appendChild(row);
+
+      updateCounter();
+
+    }
+
+
+    // =====================================
+    // REMOVE ROW
+    // =====================================
+
+    function removeRow(id) {
+
+      const row =
+        document.getElementById("row-" + id);
+
+      if (row) {
+
+        row.remove();
+
+      }
+
+      renumberRows();
+
+      updateCounter();
+
+    }
+
+
+    // =====================================
+    // RENUMBER ROWS
+    // =====================================
+
+    function renumberRows() {
+
+      const rows =
+        document.querySelectorAll(".row");
+
+      rows.forEach(function (row, index) {
+
+        const number =
+          row.querySelector(".row-number");
+
+        number.textContent =
+          "#" + (index + 1);
+
+      });
+
+    }
+
+
+    // =====================================
+    // UPDATE COUNTER
+    // =====================================
+
+    function updateCounter() {
+
+      const total =
+        document.querySelectorAll(".row").length;
+
+      document.getElementById("counter").textContent =
+        "📦 Total Entries: " + total;
+
+    }
+
+
+    // =====================================
+    // GMAIL VALIDATION
+    // =====================================
+
+    function isValidGmail(email) {
+
+      const pattern =
+        /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+      return pattern.test(email);
+
+    }
+
+
+    // =====================================
+    // SHOW MESSAGE
+    // =====================================
+
+    function showMessage(text, type) {
+
+      const message =
+        document.getElementById("message");
+
+      message.className = "message";
+
+      if (type === "success") {
+
+        message.classList.add("success");
+
+      } else {
+
+        message.classList.add("error-message");
+
+      }
+
+      message.innerHTML = text;
+
+      message.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+    }
+
+
+    // =====================================
+    // SUBMIT ALL
+    // =====================================
+
+    function submitAll() {
+
+      const rows =
+        document.querySelectorAll(".row");
+
+      const submissions = [];
+
+      const usedEmails =
+        new Set();
+
+      let hasError = false;
+
+
+      rows.forEach(function (row) {
+
+        const gmailInput =
+          row.querySelector(".gmail-input");
+
+        const passInput =
+          row.querySelector(".pass-input");
+
+
+        const gmail =
+          gmailInput.value.trim().toLowerCase();
+
+        /*
+         * PASS is a normal text field.
+         * No character-format restriction.
+         */
+
+        const pass =
+          passInput.value.trim();
+
+
+        // Reset errors
+
+        gmailInput.classList.remove("error");
+
+        passInput.classList.remove("error");
+
+
+        // =================================
+        // GMAIL EMPTY
+        // =================================
+
+        if (!gmail) {
+
+          gmailInput.classList.add("error");
+
+          hasError = true;
+
+          return;
+
+        }
+
+
+        // =================================
+        // GMAIL FORMAT
+        // =================================
+
+        if (!isValidGmail(gmail)) {
+
+          gmailInput.classList.add("error");
+
+          hasError = true;
+
+          return;
+
+        }
+
+
+        // =================================
+        // PASS EMPTY
+        // =================================
+
+        if (!pass) {
+
+          passInput.classList.add("error");
+
+          hasError = true;
+
+          return;
+
+        }
+
+
+        // =================================
+        // DUPLICATE GMAIL
+        // =================================
+
+        if (usedEmails.has(gmail)) {
+
+          gmailInput.classList.add("error");
+
+          hasError = true;
+
+          return;
+
+        }
+
+
+        usedEmails.add(gmail);
+
+
+        // =================================
+        // SAVE DATA
+        // =================================
+
+        submissions.push({
+
+          gmail: gmail,
+
+          pass: pass
+
+        });
+
+      });
+
+
+      // =====================================
+      // VALIDATION ERROR
+      // =====================================
+
+      if (hasError) {
+
+        showMessage(
+          "❌ Please check the highlighted fields. Make sure every Gmail and PASS is filled correctly.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      // =====================================
+      // EMPTY SUBMISSION
+      // =====================================
+
+      if (submissions.length === 0) {
+
+        showMessage(
+          "❌ Please add at least one entry.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      // =====================================
+      // STEP 1 ONLY
+      // =====================================
+      //
+      // Backend connection is not added yet.
+      //
+      // The collected data can be checked
+      // from the browser console.
+      //
+      // STEP 2 will connect the Web App
+      // to the Telegram Bot.
+      //
+
+      console.log(
+        "Gmail Submissions:",
+        submissions
+      );
+
+
+      // =====================================
+      // TEMPORARY SUCCESS
+      // =====================================
+
+      showMessage(
+        "✅ " +
+        submissions.length +
+        " submission(s) are ready.<br><br>" +
+        "🔄 Telegram Bot connection will be added in the next step.",
+        "success"
+      );
+
+    }
+
+  </script>
+
+</body>
+  </html>
